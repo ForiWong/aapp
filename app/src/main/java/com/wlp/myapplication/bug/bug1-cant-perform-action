@@ -1,0 +1,48 @@
+进入页面A，当前未打开定位，先跳转到设置页-打开定位；返回到页面A时，出现崩溃。
+返回当前页面时使用rxpermissions3请求权限，大概是内部的rxpermissions3的RxPermissionsFragment关联到当前的activity，
+使用了commitNow()到fragmentManger。出现bug。
+2022-04-19 14:52:22.374 16029-16029/com.bat.iglasses E/DEBUG: java.lang.RuntimeException: Failure delivering result ResultInfo{who=null, request=2, result=0, data=null} to activity {com.bat.iglasses/com.bat.iglasses.module.hardware.BindingHardwareActivity}: java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
+2022-04-19 14:52:22.375 16029-16029/com.bat.iglasses E/DEBUG:     at android.app.ActivityThread.deliverResults(ActivityThread.java:5782)
+2022-04-19 14:52:22.375 16029-16029/com.bat.iglasses E/DEBUG:     at android.app.ActivityThread.handleSendResult(ActivityThread.java:5823)
+2022-04-19 14:52:22.375 16029-16029/com.bat.iglasses E/DEBUG:     at android.app.servertransaction.ActivityResultItem.execute(ActivityResultItem.java:51)
+2022-04-19 14:52:22.375 16029-16029/com.bat.iglasses E/DEBUG:     at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:149)
+2022-04-19 14:52:22.375 16029-16029/com.bat.iglasses E/DEBUG:     at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:103)
+2022-04-19 14:52:22.375 16029-16029/com.bat.iglasses E/DEBUG:     at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2613)
+2022-04-19 14:52:22.376 16029-16029/com.bat.iglasses E/DEBUG:     at android.os.Handler.dispatchMessage(Handler.java:110)
+2022-04-19 14:52:22.376 16029-16029/com.bat.iglasses E/DEBUG:     at android.os.Looper.loop(Looper.java:219)
+2022-04-19 14:52:22.376 16029-16029/com.bat.iglasses E/DEBUG:     at android.app.ActivityThread.main(ActivityThread.java:8668)
+2022-04-19 14:52:22.376 16029-16029/com.bat.iglasses E/DEBUG:     at java.lang.reflect.Method.invoke(Native Method)
+2022-04-19 14:52:22.376 16029-16029/com.bat.iglasses E/DEBUG:     at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:513)
+2022-04-19 14:52:22.376 16029-16029/com.bat.iglasses E/DEBUG:     at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1109)
+2022-04-19 14:52:22.377 16029-16029/com.bat.iglasses E/DEBUG: Caused by: java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
+2022-04-19 14:52:22.377 16029-16029/com.bat.iglasses E/DEBUG:     at androidx.fragment.app.FragmentManager.checkStateLoss(FragmentManager.java:1703)
+2022-04-19 14:52:22.377 16029-16029/com.bat.iglasses E/DEBUG:     at androidx.fragment.app.FragmentManager.ensureExecReady(FragmentManager.java:1806)
+2022-04-19 14:52:22.377 16029-16029/com.bat.iglasses E/DEBUG:     at androidx.fragment.app.FragmentManager.execSingleAction(FragmentManager.java:1826)
+2022-04-19 14:52:22.377 16029-16029/com.bat.iglasses E/DEBUG:     at androidx.fragment.app.BackStackRecord.commitNow(BackStackRecord.java:297)
+2022-04-19 14:52:22.377 16029-16029/com.bat.iglasses E/DEBUG:     at com.tbruyelle.rxpermissions3.RxPermissions.getRxPermissionsFragment(RxPermissions.java:78)
+2022-04-19 14:52:22.378 16029-16029/com.bat.iglasses E/DEBUG:     at com.tbruyelle.rxpermissions3.RxPermissions.access$000(RxPermissions.java:37)
+2022-04-19 14:52:22.378 16029-16029/com.bat.iglasses E/DEBUG:     at com.tbruyelle.rxpermissions3.RxPermissions$1.get(RxPermissions.java:62)
+2022-04-19 14:52:22.378 16029-16029/com.bat.iglasses E/DEBUG:     at com.tbruyelle.rxpermissions3.RxPermissions$1.get(RxPermissions.java:55)
+2022-04-19 14:52:22.378 16029-16029/com.bat.iglasses E/DEBUG:     at com.tbruyelle.rxpermissions3.RxPermissions.pending(RxPermissions.java:212)
+2022-04-19 14:52:22.378 16029-16029/com.bat.iglasses E/DEBUG:     at com.tbruyelle.rxpermissions3.RxPermissions.request(RxPermissions.java:201)
+2022-04-19 14:52:22.378 16029-16029/com.bat.iglasses E/DEBUG:     at com.tbruyelle.rxpermissions3.RxPermissions.access$100(RxPermissions.java:37)
+2022-04-19 14:52:22.379 16029-16029/com.bat.iglasses E/DEBUG:     at com.tbruyelle.rxpermissions3.RxPermissions$2.apply(RxPermissions.java:103)
+2022-04-19 14:52:22.379 16029-16029/com.bat.iglasses E/DEBUG:     at io.reactivex.rxjava3.core.Observable.compose(Observable.java:6759)
+2022-04-19 14:52:22.379 16029-16029/com.bat.iglasses E/DEBUG:     at com.tbruyelle.rxpermissions3.RxPermissions.request(RxPermissions.java:177)
+2022-04-19 14:52:22.379 16029-16029/com.bat.iglasses E/DEBUG:     at com.bat.iglasses.module.hardware.BindingViewModel.initBtAndScan(BindingViewModel.java:100)
+2022-04-19 14:52:22.379 16029-16029/com.bat.iglasses E/DEBUG:     at com.bat.iglasses.module.hardware.BindingViewModel.initData(BindingViewModel.java:89)
+2022-04-19 14:52:22.379 16029-16029/com.bat.iglasses E/DEBUG:     at com.bat.iglasses.module.hardware.BindingHardwareActivity.onActivityResult(BindingHardwareActivity.java:68)
+2022-04-19 14:52:22.380 16029-16029/com.bat.iglasses E/DEBUG:     at android.app.Activity.dispatchActivityResult(Activity.java:8541)
+2022-04-19 14:52:22.380 16029-16029/com.bat.iglasses E/DEBUG:     at android.app.ActivityThread.deliverResults(ActivityThread.java:5775)
+2022-04-19 14:52:22.380 16029-16029/com.bat.iglasses E/DEBUG: 	... 11 more
+2022-04-19 14:52:22.380 16029-16029/com.bat.iglasses E/DEBUG: Back traces ends.
+2022-04-19 14:52:22.380 16029-16029/com.bat.iglasses E/DEBUG: --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+2022-04-19 14:52:22.380 16029-16029/com.bat.iglasses E/DEBUG: meminfo:
+2022-04-19 14:52:22.381 16029-16029/com.bat.iglasses E/DEBUG: MemTotal:        5787468 kB
+
+最终看到了关键所在，”Can not perform this action after onSaveInstanceState”,就是说不在保存状态之后去进行”this action”,”
+this action”指的就是下边的FragmentManager的commint()方法。我们都知道，FragmentManager开启事物最后都要提交。
+意思就是说，提交这个事物的时候并不是立马就发生的，而是在这个线程下次准备好的时候（暂且这样翻译，不要在乎细节）。
+一个事物只能在它所包含的activity savedInstanceState之前。如果在savedInstanceState之后提交，则会抛出异常，这是因为这
+个状态再提交之后就会缺失。使用commitAllowingStateLoss()放弃保存这个状态。
+说到底，就是说可以用commitAllowingStateLoss()代替commit()，这样就不会抛出这个异常了。
