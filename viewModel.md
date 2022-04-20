@@ -118,3 +118,5 @@ Activity / Fragment销毁的时候HolderFragment会跟随销毁，在HolderFragm
 或者Fragment销毁的时候会移除HashMap中对应的value。
 5.因为ViewModel是以Activity或者Fragment为存在基础，所以ViewModel可以在当前Activity和Fragment中实现数据共享  
 ，前提是传入相同的key值。
+
+4、liveData的使用
