@@ -16,13 +16,22 @@ DataBinding 4.19
 LiveData 4.19
 mvvm、mvp 4.20
 
-LifeCycle 4.20
-Room
-Navigation
+LifeCycle 4.24 ??
+Room ??
+Navigation ??
 composeUI
-WorkManager
-Paging
+WorkManager ?-
+Paging ?-
 multidex
+dagger2
+dataStore
+kotlin
+composeUI
+flutter
+
+DataStore 与 MMKV
+反射及应用场景
+泛型
 
 5、java和kotlin语言；
 多线程开发；

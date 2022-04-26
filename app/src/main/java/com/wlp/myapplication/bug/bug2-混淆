@@ -1,0 +1,52 @@
+https://blog.csdn.net/yuzhiqiang_1993/article/details/80676170
+Android多模块混淆、多module混淆、多library混淆的正确姿势
+
+buildTypes {
+    release {
+        minifyEnabled true   //开启混淆
+        zipAlignEnabled true  //压缩优化
+        shrinkResources true  //移出无用资源
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        //默认的混淆文件以及我们指定的混淆文件
+    }
+}
+
+如果你的项目只有一个app module，那么这样配置混淆就可以了。但是如果你的项目有好几个module，module之间还是相互依赖的，
+那么该怎么混淆呢？
+
+混淆方法
+1）在app module中统一配置混淆规则
+我们可以直接在app module中build.gradle文件配置所有module需要混淆的规则。这样，其他module中就无需开启
+混淆。但是并不推荐使用这种方法，当我们取消依赖某些module的时候，这样很容易造成混淆规则冗余，我们还需
+要删除掉该module相关的混淆配置，很麻烦。
+
+2）各个module单独配置混淆规则（推荐）
+我们也可以单独为module配置混淆规则，比较推荐这种做法。每个module管理自己的混淆文件，当我们不依赖该module
+的时候，就不会发生第一种方法出现的问题了。
+
+我们把app module称作为主模块，其依赖的其他module称作为子模块
+
+如图所示。我的app模块是依赖了其他模块的，其他模块也有相互依赖的地方。
+
+网上很多关于子module的混淆配置是错误的，经过我的多次实践得出，主模块的混淆开关配置会直接影响到子模块，
+也就是说如果你的主模块开启的混淆，就算你的子模块关闭混淆开关，最终子模块还是会被混淆的。
+
+其次，子模块混淆文件的指定是通过consumerProguardFiles这个属性来指定的，并不是proguardFiles 属性，而且
+我们无需配置其他的选项，只需要配置consumerProguardFiles属性就可以。该属性表示在打包的时候会自动寻找该
+module下我们指定的混淆文件对代码进行混淆。
+
+ consumerProguardFiles "proguard-rules.pro"
+
+如果我们发布出一些开源库去给别人用，想要对库代码进行混淆的话，也可以通过配置该属性来达到目的。
+
+（1）app主模块的混淆开关影响子模块；
+（2）子模块的混淆指定     consumerProguardFiles "proguard-rules.pro"
+
+关于多模块混淆的小技巧
+一般来说，在组件化开发的情况下，app module的代码是很少的，依赖的第三方库也是很少的。我们可以把通用的混淆
+规则放到app module中。 这样子module就无需配置通用混淆规则，只需要配置一些该module所需要的混淆规则即可。
+大大减少了混淆代码。
+
+app module下的混淆规则
+这里给出一个也是从网上找的基本的混淆模板。关于自己项目的实体类和依赖的第三方sdk需要自己添加混淆规则，
+一般开源库都会给出混淆规则，没有的话就要自己百度了
