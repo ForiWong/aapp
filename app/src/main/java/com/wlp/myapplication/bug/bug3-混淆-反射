@@ -1,0 +1,70 @@
+D/BaseActivity.java: [ (BaseActivity.java:41)#OnCreate ] onCreate():com.bat.visionscreening.module.main.LoginActivity@f63e6a2
+I/DecorView[]: pkgName:com.bat.visionscreening.test old windowMode:0 new windoMode:1, isFixedSize:false
+W/nscreening.tes: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (greylist, reflection, allowed)
+W/nscreening.tes: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (greylist, reflection, allowed)
+I/OverScrollerOptimization: start init SmartSlideOverScroller and get the overscroller config
+    get the overscroller config
+I/TAG: writeLog2File :-> 没有写入权限
+D/LogUtils.java: [ (LogUtils.java:339)#D ] activity -> types , 大小：2
+    0 : class g.c.b.d.r   <-- ActivityLoginBinding
+    1 : class com.bat.visionscreening.module.main.LoginViewModel
+I/TAG: writeLog2File :-> 没有写入权限
+D/LogUtils.java: [ (LogUtils.java:339)#D ] activity -> types, 大小：1
+    0 : class g.c.b.f.e.j  <-- LoginModel
+I/TAG: writeLog2File :-> 没有写入权限
+D/ViewModelFactory.java: [ (ViewModelFactory.java:27)#Create ] 创建vm: class android.app.Application : class g.c.b.f.e.j
+I/TAG: writeLog2File :-> 没有写入权限
+D/LogUtils.java: [ (LogUtils.java:339)#D ] 构造函数：, 大小：2
+    0 : public com.bat.visionscreening.module.main.LoginViewModel(android.app.Application)
+    1 : public com.bat.visionscreening.module.main.LoginViewModel(android.app.Application,g.c.b.f.e.j)
+W/System.err: java.lang.InstantiationException: java.lang.Class<g.c.b.f.e.j> has no zero argument constructor
+W/System.err:     at java.lang.Class.newInstance(Native Method)
+        at g.c.a.a.c.b.create(ViewModelFactory.java:29)   <-- ViewModelFactory
+        at androidx.lifecycle.ViewModelProvider.get(ViewModelProvider.java:187)
+        at androidx.lifecycle.ViewModelProvider.get(ViewModelProvider.java:150)
+        at com.bat.base.frame.mvvm.BaseActivity.h(BaseActivity.java:263)
+        at com.bat.base.frame.mvvm.BaseActivity.o(BaseActivity.java:105)
+        at com.bat.base.frame.mvvm.BaseActivity.onCreate(BaseActivity.java:46)
+        at android.app.Activity.performCreate(Activity.java:8214)
+        at android.app.Activity.performCreate(Activity.java:8202)
+        at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1320)
+        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4033)
+        at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:4247)
+        at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:91)
+        at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:149)
+        at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:103)
+        at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2613)
+        at android.os.Handler.dispatchMessage(Handler.java:110)
+        at android.os.Looper.loop(Looper.java:219)
+        at android.app.ActivityThread.main(ActivityThread.java:8668)
+        at java.lang.reflect.Method.invoke(Native Method)
+        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:513)
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1109)
+D/AndroidRuntime: Shutting down VM
+
+E:\visionScreening\app\build\outputs\mapping\developDebug\mapping.txt //混淆前后的映射文件
+
+-keep class * extends com.bat.base.frame.mvvm.BaseModel{
+    *();
+}
+
+## ViewModelFactory
+    public <T extends ViewModel> T create(Class<T> cls) {
+        try {
+            LogUtils.d("创建vm: " + Application.class.toString() + " : " + modelCls.toString());
+            LogUtils.d("构造函数：" , cls.getConstructors());
+            return cls.getConstructor(Application.class, modelCls).newInstance(mApplication, modelCls.newInstance());
+            //todo 还有疑问的是 其他创建VM的时候为啥没有影响呢
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
