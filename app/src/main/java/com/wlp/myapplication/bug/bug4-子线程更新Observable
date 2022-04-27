@@ -1,0 +1,13 @@
+observable 是可以在线程被更新的，然后databinding 更新ui的。
+既然这个是可以更新的，那就是在进行databinding recyclerview 的时候出问题了。
+更新列表没响应，但是pd String 是没问题的。
+关于列表数据的绑定的做法还是有问题的。
+
+public ObservableField<String> account = new ObservableField<>("");
+
+new Thread(new Runnable() {
+        @Override
+        public void run() {
+            account.set("0988765434");
+        }
+    }).start();
