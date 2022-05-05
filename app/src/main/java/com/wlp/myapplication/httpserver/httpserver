@@ -1,0 +1,62 @@
+https://github.com/NanoHttpd/nanohttpd
+//NanoHttpd
+Tiny, easily embeddable HTTP server in Java.
+NanoHTTPD is a light-weight HTTP server designed for embedding in other applications, released under a Modified BSD licence.
+NanoHTTPD是一个免费、轻量级的(只有一个Java文件) HTTP服务器,可以很好地嵌入到Java程序中。支持 GET, POST, PUT, HEAD 和 DELETE 请求，支持文件上传，占用内存很小。可轻松定制临时文件使用和线程模型。
+
+//重复使用端口
+socket.setReuseAddress(true);
+/**
+ * Enable/disable the {@link SocketOptions#SO_REUSEADDR SO_REUSEADDR}
+ * socket option.
+ * <p>
+ * When a TCP connection is closed the connection may remain
+ * in a timeout state for a period of time after the connection
+ * is closed (typically known as the {@code TIME_WAIT} state
+ * or {@code 2MSL} wait state).
+ * For applications using a well known socket address or port
+ * it may not be possible to bind a socket to the required
+ * {@code SocketAddress} if there is a connection in the
+ * timeout state involving the socket address or port.
+ * <p>
+ * Enabling {@link SocketOptions#SO_REUSEADDR SO_REUSEADDR} prior to
+ * binding the socket using {@link #bind(SocketAddress)} allows the socket
+ * to be bound even though a previous connection is in a timeout state.
+ * <p>
+ * When a {@code ServerSocket} is created the initial setting
+ * of {@link SocketOptions#SO_REUSEADDR SO_REUSEADDR} is not defined.
+ * Applications can use {@link #getReuseAddress()} to determine the initial
+ * setting of {@link SocketOptions#SO_REUSEADDR SO_REUSEADDR}.
+ * <p>
+ * The behaviour when {@link SocketOptions#SO_REUSEADDR SO_REUSEADDR} is
+ * enabled or disabled after a socket is bound (See {@link #isBound()})
+ * is not defined.
+ *
+ */
+在网络应用中（如Java Socket Server），当服务关掉立马重启时，很多时候会提示端口仍被占用（因端口上有处于
+TIME_WAIT的连接）。此时可通过 SO_REUSEADDR 参数（ socket.setReuseAddress(true); ）来使得服务关掉重启时
+立马可使用该端口，而不是提示端口占用。
+
+如果端口忙，但TCP状态位于 TIME_WAIT ，可以重用 端口。如果端口忙，而TCP状态位于其他状态，重用端口时依旧
+得到一个错误信息， 抛出“Address already in use： JVM_Bind”。如果你的服务程序停止后想立即重启，不等60
+秒，而新套接字依旧 使用同一端口，此时 SO_REUSEADDR 选项非常有用。
+
+TCP关闭过程中的TIME_WAIT状态就是client端的2MSL状态，其作用是确保server端可以收到client端发送的确认报文
+：最后一个确认报文可能没被server端收到，此时server端会重发fin报文，client端等待2MSL时间使得可以收到server
+端重发的fin报文。
+
+
+//启动服务，端口被占用
+android java.net.BindException: bind failed: EADDRINUSE (Address already in use)
+
+
+//AndServer//
+https://github.com/yanzhenjie/AndServer
+AndServer is an HTTP and reverse proxy server.
+Web server and Web framework of Android platform. It provides annotations like SpringMVC, and if you are familiar with SpringMVC, you can master it very quickly.
+Static html website deployment.
+Dynamic http api deployment.
+Reverse proxy server.
+
+AndServer是Android平台的Web Server和Web Framework。 它基于编译时注解提供了类似SpringMVC的注解和功能，
+如果您熟悉SpringMVC，则可以非常快速地掌握它。
