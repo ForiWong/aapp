@@ -1,5 +1,9 @@
 package com.wlp.myapplication;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkRequest;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -17,6 +21,7 @@ import com.wlp.myapplication.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        setNetworkCallback();
     }
 
     @Override
@@ -72,5 +79,45 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private NetworkCallbackImpl mNetworkCallback;
+
+    private void setNetworkCallback(){
+        mNetworkCallback = new NetworkCallbackImpl();
+        NetworkRequest.Builder builder = new NetworkRequest.Builder();
+        NetworkRequest request = builder.build();
+
+        //Class that answers queries about the state of network connectivity.
+        // It also notifies applications when network connectivity changes.
+        //作为查询网络连接状态的应答。当网络连接状态变化的时通知应用程序。
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connMgr != null) {
+            connMgr.requestNetwork(request, mNetworkCallback);
+        }
+    }
+
+    //Base class for {@code NetworkRequest} callbacks. Used for notifications about network
+    //changes. Should be extended by applications wanting notifications.
+    class NetworkCallbackImpl extends ConnectivityManager.NetworkCallback {
+        @Override
+        public void onAvailable(Network network) {
+            super.onAvailable(network);
+            //
+        }
+
+        @Override
+        public void onLost(Network network) {
+            super.onLost(network);
+            runOnUiThread(() -> {
+                Toast.makeText(MainActivity.this, "网络连接断开", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        @Override
+        public void onUnavailable() {
+            super.onUnavailable();
+            runOnUiThread(() -> Toast.makeText(MainActivity.this, "Unavailable", Toast.LENGTH_SHORT).show());
+        }
     }
 }
