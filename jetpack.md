@@ -6,7 +6,7 @@ mvvm、mvp 4.20
 
 LifeCycle 5.6
 Room 5.6
-# Navigation
+Navigation
 # WorkManager
 # Paging
 # dataStore

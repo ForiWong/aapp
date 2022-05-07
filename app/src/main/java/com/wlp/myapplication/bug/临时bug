@@ -7,3 +7,42 @@ Fatal signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x10 in tid 29933 (H
 
 3、为啥框架中使用lifecycleviewmodel没有执行ondestroy ，各种交叉引用导致没有回收吗？
 
+4、
+android.view.WindowLeaked: Activity com.bat.visionscreening.module.connect.ConnectBleActivity has leaked window DecorView@3590813[] that was originally added here
+        at android.view.ViewRootImpl.<init>(ViewRootImpl.java:605)
+        at android.view.WindowManagerGlobal.addView(WindowManagerGlobal.java:363)
+        at android.view.WindowManagerImpl.addView(WindowManagerImpl.java:129)
+        at android.app.Dialog.show(Dialog.java:450)
+        at g.c.c.f.b.b.c(BleConnectPresenter.java:123)
+1.原因是这样的：Activity /Dialog /PopupWindow 都有相对应的WindowManager窗体管理器，而Dialog /PopupWindow 是依靠Activity而存在( 注意)；
+2.所以当Dialog /PopupWindow还在显示的时候，将其依靠的Activity直接销毁掉，就会抛Window Leaked异常了，因为Dialog /PopupWindow的WindowManager已经没有谁可以附属了，所以它的窗体管理器已经泄漏了.
+
+private boolean isCantTouch(Activity activity){
+        if(activity == null) return true;
+        return activity.isFinishing() || activity.isDestroyed();
+}
+
+5、
+Caused by: java.lang.ArrayIndexOutOfBoundsException: length=73; index=-1
+        at java.util.ArrayList.get(ArrayList.java:439)
+        at com.bat.visionscreening.module.connect.ConnectBleActivity$a.a(ConnectBleActivity.java:238)
+在不断进入BleConnectActivity中，依次连接、断开、切换时，导致currentPosition设置出bug，多线程公用，但又是没同步处理。
+
+6、
+AtomicInteger类是系统底层保护的int类型，通过提供执行方法的控制进行值的原子操作。
+//初始值是 0
+AtomicInteger atomicInteger = new AtomicInteger();
+//初始值是 100
+AtomicInteger atomicInteger = new AtomicInteger(100);
+int currentValue = atomicInteger.get();         //100
+atomicInteger.set(1234);
+
+addAndGet()- 以原子方式将给定值添加到当前值，并在添加后返回新值。
+getAndAdd() - 以原子方式将给定值添加到当前值并返回旧值。
+incrementAndGet()- 以原子方式将当前值递增1并在递增后返回新值。它相当于i ++操作。
+getAndIncrement() - 以原子方式递增当前值并返回旧值。它相当于++ i操作。
+decrementAndGet()- 原子地将当前值减1并在减量后返回新值。它等同于i-操作。
+getAndDecrement() - 以原子方式递减当前值并返回旧值。它相当于-i操作。
+
+7、
+
