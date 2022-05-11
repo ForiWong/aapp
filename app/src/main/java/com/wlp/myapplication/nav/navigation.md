@@ -55,3 +55,6 @@ NavOptions stores special options for navigate actions
 In Android, a deep link is a link that takes you directly to a specific destination within an app.
 翻译：深链接是一个能够直接到达app中特定目的地的链接。
 
+使用这个库有一个前提条件，就是整个app只有一个activity多个fragment。
+如果就像之前是多个activity的话，有必要使用navigation吗？
+

@@ -7,17 +7,28 @@ mvvm、mvp 4.20
 LifeCycle 5.6
 Room 5.6
 Navigation
+WorkManager 处理后台任务
+# kotlin ☆☆
 Paging
-# WorkManager
-# dataStore
-multidex-
-dagger2-
-kotlin-
-composeUI-
+    使用kotlin
+# composeUI ☆
+    与flutter高度相似，使用kotlin语言
+
+# dataStore DataStore 使用kotlin, 有两种实现方式：Preferences 和 Proto，从中选择其一即可
+                      使用上跟SharedPreference很类似，也很简单，Android官方推荐使用
+multidex ×
+    超过最大方法数限制的问题，分包。
+dagger2 ☆
+    依赖注入
+hilt
+startup
+viewpager2
 flutter
 
-DataStore 与 MMKV
+IOC
+APT
 反射及应用场景
+DataStore 与 MMKV
 泛型
 
 5、java和kotlin语言；
@@ -32,49 +43,16 @@ rxjava,okhttp,retrofit,databinding,lambada，gradle脚本；
 具备扎实的数据结构和算法基础；
 熟练掌握设计模式。
 
--Kotlin-代码使用Kotlin编写
-
--Jetpack]
-
-  ViewModel、LifeCycle
-
-  DataBinding、WorkManager
-
-  Room、Paging、等组件
-
 -Kotlinx Coroutines-Kotlin协程
 
 -Retrofit-网络请求框架封装
-
 -Glide-图片加载
-
 -OkHttp-网络请求
-
 -Gson-Gson 解析
-
-# -Glide Transformations-图像转换
-
--Eventbus-事件总线
-
--Permissionx-动态请求权限封装
-
+#  -Glide Transformations-图像转换
 #  -FlycoTabLayout-TabLayout封装
-
 #  -SmartRefreshLayout-下拉刷新框架
-
--BannerViewPager-Banner轮播图
-
--Immersionbar-状态栏管理
-
-# -PhotoView-支持手势缩放图片
-
--Circleimageview-圆形图像
-
--GSYVideoPlayer-视频播放器
-
--VasSonic-提升H5首屏加载速度
-
--Leakcanary-内存泄漏检测
+#  -PhotoView-支持手势缩放图片
 
 6、Flutter
 （1）难点、亮点：自定义组件、绘制、事件、动画
