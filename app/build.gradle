@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id  'com.yanzhenjie.andserver'
+    // 应用safe args gradle插件
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -54,6 +56,17 @@ dependencies {
     def room_version = "2.4.2"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    // Navigation组件版本号，推荐使用最新的稳定版本号
+    def nav_version = "2.4.1"
+    // Java和Kotlin二选一即可
+    // 依赖Java语言对应的navigation组件
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
+    // 依赖Kotlin语言对应的navigation组件
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
 }
 
 repositories {

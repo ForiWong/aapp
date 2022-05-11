@@ -7,8 +7,8 @@ mvvm、mvp 4.20
 LifeCycle 5.6
 Room 5.6
 Navigation
+Paging
 # WorkManager
-# Paging
 # dataStore
 multidex-
 dagger2-

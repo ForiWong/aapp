@@ -1,20 +1,36 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google'}
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin'}
+        maven { url 'https://maven.aliyun.com/repository/public'}
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.2.2"
+        classpath "com.android.tools.build:gradle:7.0.4"
         classpath 'com.yanzhenjie.andserver:plugin:2.1.10'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
+        // safe args gradle插件版本号
+        def nav_version = "2.4.1"
+        // 依赖safe args gradle插件。用于自动生成目的地之间传递参数需要的class文件
+        // 通过它自动生成的代码我们可以方便快捷地在导航的时候传递参数
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }
 
 allprojects {
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google'}
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin'}
+        maven { url 'https://maven.aliyun.com/repository/public'}
+        //Gradle：Download kotlin-compiler-embeddable-1.6.0.jar too slow
+
         google()
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon

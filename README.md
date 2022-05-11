@@ -11,3 +11,28 @@ git remote add origin git@github.com:ForiWong/aapp.git
 implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
 4、Android Jetpack应用指南
+
+5、（1）Blankj
+AndroidUtilCode android开发工具类
+
+AndroidStandardDevelop android开发规范
+
+resume 蔡梦杰
+
+（2）Kai zhu
+compose UI
+
+（3）JsonChao JsonChao
+too many
+
+（4）wanglu1209 公众号：「Flutter笔记」
+Flutter学习
+
+（5）AWeiLoveAndroid AweiLoveAndroid
+Flutter-learning
+
+（6）JessYan JessYanCoding
+
+AndroidAutoSize
+
+RetrofitUrlManager
