@@ -1,13 +1,13 @@
 Fatal signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x10 in tid 24279 (HeapTaskDaemon), pid 24265 (visionscreening)
 Fatal signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x10 in tid 29933 (HeapTaskDaemon), pid 29917 (visionscreening)
-1、测试 蓝牙已断开提
+##1、测试 蓝牙已断开提
 
-2、视力表单机版的在使用网络连接时有bug
+##2、视力表单机版的在使用网络连接时有bug
 刷新UI的时候，OkSocket比蓝牙的时候满很多。
 
-3、为啥框架中使用lifecycleviewmodel没有执行ondestroy ，各种交叉引用导致没有回收吗？
+##3、为啥框架中使用lifecycleviewmodel没有执行ondestroy ，各种交叉引用导致没有回收吗？
 
-4、
+##4、
 android.view.WindowLeaked: Activity com.bat.visionscreening.module.connect.ConnectBleActivity has leaked window DecorView@3590813[] that was originally added here
         at android.view.ViewRootImpl.<init>(ViewRootImpl.java:605)
         at android.view.WindowManagerGlobal.addView(WindowManagerGlobal.java:363)
@@ -22,13 +22,13 @@ private boolean isCantTouch(Activity activity){
         return activity.isFinishing() || activity.isDestroyed();
 }
 
-5、
+##5、
 Caused by: java.lang.ArrayIndexOutOfBoundsException: length=73; index=-1
         at java.util.ArrayList.get(ArrayList.java:439)
         at com.bat.visionscreening.module.connect.ConnectBleActivity$a.a(ConnectBleActivity.java:238)
 在不断进入BleConnectActivity中，依次连接、断开、切换时，导致currentPosition设置出bug，多线程公用，但又是没同步处理。
 
-6、
+##6、
 AtomicInteger类是系统底层保护的int类型，通过提供执行方法的控制进行值的原子操作。
 //初始值是 0
 AtomicInteger atomicInteger = new AtomicInteger();
@@ -44,5 +44,104 @@ getAndIncrement() - 以原子方式递增当前值并返回旧值。它相当于
 decrementAndGet()- 原子地将当前值减1并在减量后返回新值。它等同于i-操作。
 getAndDecrement() - 以原子方式递减当前值并返回旧值。它相当于-i操作。
 
-7、
+##7、
+1.概述 BLE 连接过程中有三个重要的数据包：
+SCAN_REQ、SCAN_RSP、CONNECT_REQ
+SCAN_REQ： 扫描请求，由主设备（MASTER DEVICE）向从设备（SLAVE DEVICE）发出，目的是为了获得从设备的响应以得到更多的从设备广播数据信息（包括设备名字，或者服务UUID，及其它如厂家特定格式的信息（如硬件版本，软件版本号，设备系列号等等）。
+SCAN_RSP:从设备对就主设备发起的SCAN_REQ的响应，作为广播包的补充，从设备可以给主设备更多的广播数据，比如说，有些设备在广播 包里面没有设备名字，这个时候就可以把设备名字放在这个包里面发给主设备。
+CONNECT_REQ：
+主设备向从设备发出连接请求。至此连接建立完成（从设备不会响应这个请求），如果从设备没有连接上面的问题的话，以后 主从双方会开始相互交换有效数据（基于GAP,GATT及SMP协议）或者交换空包。 以下对这三个数据包进行详细解读。
+
+2.BLE单次写的数据量大小是有限制的，通常是20字节，可以尝试通过requestMTU增大，但不保证能成功。分包写是一种解决方案，需要定义分包协议，假设每个包大小20字节，分两种包，数据包和非数据包。
+对于数据包，头两个字节表示包的序号，剩下的都填充数据。对于非数据包，主要是发送一些控制信息。
+
+总体流程如下：
+1、发端发送控制包，告诉对方要发送的总的包数
+2、收端回一个ACK包，表示准备好了，对方可以发送了
+3、发端开始批量发送数据，为了速度，不需要对端回复
+4、收端收到最后一个包或超时后，开始检查还缺哪些包，然后回复ACK，带上丢的包序号
+5、发端重发丢的包
+6、收端全部收到，回复ACK，CRC校验，包数据拼接好了传到上层
+这里面核心是状态机，另外要注意对于BLE来说，主端和从端都可以收发数据，但是是非对称的。对主端来说，发是write characteristic，收是onCharacteristicChanged，对从端来说，发是sendNotify，收是onCharacteristicWrite。尽管如此，但是协议部分是相同的，所以我们要抽象成两层，底层是收发的物理层，上层是分包的协议层，再上层就是业务层。
+
+
+
+客户端：
+（1）onCrate()
+初始化BtClient mClient = new BtClient(this);
+注册蓝牙广播
+开始搜索蓝牙
+	BluetoothAdapter.getDefaultAdapter().startDiscovery();
+
+（2）点击事件
+
+连接
+mClient.connect(dev);
+	创建BluetoothSocket 明文或加密
+	循环读取
+
+发送信息
+
+（3）onDestroy
+注销广播 unregisterReceiver(mBtReceiver);
+
+经典蓝牙
+BLE
+
+经典蓝牙和低功耗蓝牙进行，
+优化筛查助手中的蓝牙工具类
+优化混淆、测试
+
+##8、
+状态栏参考 https://www.jianshu.com/p/932568ed31af
+
+1、状态栏的背景颜色改为白色、或其他颜色
+
+（1）4.4之前的，< 19
+
+	<style name="TranslucentTheme" parent="AppTheme">
+        <!--在Android 4.4之前的版本上运行，直接跟随系统主题-->
+    </style>
+
+（2）api19(4.4) 无法改变背景颜色，但是可以通过布局
+
+<resources>
+<style name="TranslucentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+//设置为true，意味着xml布局延伸到状态栏
+<item name="android:windowTranslucentStatus">true</item>
+<item name="android:windowTranslucentNavigation">false</item>
+</style>
+</resources>
+
+（3）api21(5.0)
+
+resources>
+
+    <style name="TranslucentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        //设置为false，意味着布局不会延伸到状态栏
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <!--Android 5.x开始需要把颜色设置为程序的主题色白色，否则导航栏会呈现系统默认的浅灰色-->
+        <item name="android:statusBarColor">@android:color/white</item>
+    </style>
+
+</resources>
+
+
+2、白色背景，图标改为黑色
+
+修改状态栏中的文字及图标的颜色--android系统6.0以上可修改
+
+在Activity的onCreate方法中加入代码
+
+//状态栏中的文字颜色和图标颜色，需要android系统6.0以上，而且目前只有一种可以修改（一种是深色，一种是浅色即白色）
+if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+	//修改为深色，因为我们把状态栏的背景色修改为主题色白色，默认的文字及图标颜色为白色，导致看不到了。
+	activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+}
+
+
+##9、
+ShimmerTextView 炫酷动画效果的text view
+闪烁的布局: https://github.com/team-supercharge/ShimmerLayout
 
