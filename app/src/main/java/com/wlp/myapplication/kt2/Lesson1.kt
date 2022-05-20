@@ -166,7 +166,170 @@ private fun `87899`(){
     //...应用加密复杂核心函数供第三方使用
 }
 
+//匿名函数
+fun main31(){
+    val len = "Derry".count()
+    println(len)
+
+    val len2 = "Derry".count(){
+        it == 'r'
+    }
+//    val len2 = "Derry".count{
+//        it == 'r'
+//    }
+    println(len2)
+}
+
+//隐式返回
+fun main32(){
+    //写一个函数
+
+    //第一步对函数的输入输出声明
+    val methodAction: () -> String
+
+    //第二步
+    methodAction = {
+        val input = 9999
+        "$input Derry" //相当于return
+        //隐式函数不写return 最后一行就是返回值
+    }
+
+    //第三步 调用此函数
+    println(methodAction())
+}
+
+//函数参数
+fun main33(){
+    //相当于对上面隐式返回的丰富
+    val methodAction : (Int, Int, Int) -> String = { number1, number2, number3 ->
+        val inout = 999
+        "$inout Derry 参数： $number1, $number2, $number3"
+    }
+
+    //调用函数
+    methodAction(1,2,3)
+
+    //it 关键字
+    val methodAction2 : (String) -> String = {
+        "$it Derry" //it 就是默认的入参，一个参数的时候
+    }
+
+    //匿名函数的类型推断
+    //常规 方法名后为冒号
+    val method : () -> String = {"00"}
+
+    //类型推断 返回为 String
+    val method1 = {v1:Double, v2 :Float ->
+        "v1:$v1, v2:$v2"
+    }
+
+    //匿名函数就是lambda
+    val addMethod = {num1: Int, num2: Int ->
+        "$num1 : $num2"
+    }
+    println(addMethod(1,2))
+
+    //类型推断为Any类型
+    val weekMethod = {num: Int ->
+        when(num){
+            1 -> "yi"
+            2 -> "er"
+            else -> -1
+        }
+    }
+    println(weekMethod(2))
+
+}
+
+//定义 参数是函数 的函数
+//在java只能用回调了
+const val USER_DB = "Derry"
+const val PWD_DB = "123456"
+
+fun main(){
+    loginAPI("abc", "123", {msg: String, code: Int ->
+        println("用户名：$msg, 密码：$code")
+    })
+
+    loginAPI("abc", "123", responseResult = {msg: String, code: Int ->
+        println("用户名：$msg, 密码：$code")
+    })
+
+    //最终的方式
+    loginAPI("abc", "123") { msg: String, code: Int ->
+        println("用户名：$msg, 密码：$code")
+    }
+}
+
+inline fun loginAPI(user: String, pwd: String, responseResult:(String, Int) -> Unit){
+    if(user == null || pwd == null){
+        TODO("用户名或密码为空")
+    }
+    //做很多的经验 前端经验
+    if(user.length > 3 && pwd.length > 3){
+        if(webServieLoginApi(user, pwd)){
+            responseResult("login success", 200)
+        }else{
+            responseResult("login fail", 200)
+        }
+    }else{
+        TODO("用户名和密码不合格")
+    }
+}
+
+//登录的api
+fun webServieLoginApi(user:String, pwd:String): Boolean{
+    return user== USER_DB && pwd== PWD_DB
+}
+
+//此函数有使用lamda作为参数，就需要声明成内联
+//不使用内联，在调用时，会生成多个对象完成lamda的调用，会造成性能损耗
+//使用内联，相当于C++ #define 宏定义 宏替换，会把代码低缓到调用处，没有任何的对象开辟。
+//内联使用 inline，函数参数尽量使用内联！！！
+
+//函数的参数是函数：函数的引用
+fun main51() {
+    //方式一
+    loginAPI("abc", "123", ::methodResponseResult)
+    //方式二
+    val obj = :: methodResponseResult
+    loginAPI("abc", "123", obj);
+}
+
+fun methodResponseResult(msg:String, code:Int){
+    println("用户名：$msg, 密码：$code")
+}
 
 
+//函数类型作为函数的返回类型
+fun main52(){
+    show51("msg")
 
+    val method = showMethod("abc")
+    //返回函数
+    method("adc", 123)
+}
 
+fun show51(info:String):Boolean{
+    println("我的$info")
+    return true
+}
+
+fun showMethod(info: String): (String, Int) -> String {
+    println("打印$info")
+
+    //返回一个函数，匿名函数
+    return {name: String, age: Int ->
+        "我是$name, $age"
+    }
+}
+
+/**
+//匿名函数 与 具名函数
+    {
+
+}
+
+::
+
+ */
