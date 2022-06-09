@@ -46,3 +46,5 @@ this action”指的就是下边的FragmentManager的commint()方法。我们都
 一个事物只能在它所包含的activity savedInstanceState之前。如果在savedInstanceState之后提交，则会抛出异常，这是因为这
 个状态再提交之后就会缺失。使用commitAllowingStateLoss()放弃保存这个状态。
 说到底，就是说可以用commitAllowingStateLoss()代替commit()，这样就不会抛出这个异常了。
+
+new RxPermissions(this).request("");

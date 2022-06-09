@@ -145,3 +145,62 @@ if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 ShimmerTextView 炫酷动画效果的text view
 闪烁的布局: https://github.com/team-supercharge/ShimmerLayout
 
+
+java.lang.RuntimeException: Unable to start activity ComponentInfo{com.bat.iglasses/com.bat.iglasses.module.
+common.KtActivity}: java.lang.ClassCastException: libcore.reflect.ParameterizedTypeImpl cannot be cast to
+java.lang.Class
+
+E/AndroidRuntime: FATAL EXCEPTION: main
+    Process: com.bat.iglasses, PID: 16776
+    java.lang.RuntimeException: Unable to start activity ComponentInfo{com.bat.iglasses/com.bat.iglasses.module.common.KtActivity}: java.lang.ClassCastException: libcore.reflect.ParameterizedTypeImpl cannot be cast to java.lang.Class
+        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4060)
+        at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:4247)
+        at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:91)
+        at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:149)
+        at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:103)
+        at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2613)
+        at android.os.Handler.dispatchMessage(Handler.java:110)
+        at android.os.Looper.loop(Looper.java:219)
+        at android.app.ActivityThread.main(ActivityThread.java:8668)
+        at java.lang.reflect.Method.invoke(Native Method)
+        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:513)
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1109)
+     Caused by: java.lang.ClassCastException: libcore.reflect.ParameterizedTypeImpl cannot be cast to java.lang.Class
+        at com.bat.base.frame.mvvm.BaseActivity.initViewDataBinding(BaseActivity.java:86)
+        at com.bat.base.frame.mvvm.BaseActivity.onCreate(BaseActivity.java:44)
+        at android.app.Activity.performCreate(Activity.java:8214)
+        at android.app.Activity.performCreate(Activity.java:8202)
+        at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1320)
+        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4033)
+        at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:4247) 
+        at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:91) 
+        at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:149) 
+        at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:103) 
+        at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2613) 
+        at android.os.Handler.dispatchMessage(Handler.java:110) 
+        at android.os.Looper.loop(Looper.java:219) 
+        at android.app.ActivityThread.main(ActivityThread.java:8668) 
+        at java.lang.reflect.Method.invoke(Native Method) 
+        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:513) 
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1109) 
+
+在java代码中跳转到kt活动。
+kt类能不能继承java类
+
+解决项目中使用kotlin不能直接引用xml中id
+
+kotlin新特性支持直接在kt文件中引用xml中view的id，省略掉了findViewById的步骤。使用起来比较简单。
+如果项目中出现不能直接引用的问题。则可能是插件的问题。添加如下代码即可：
+apply plugin: 'kotlin-android-extensions'
+
+然后在 Code 选项中 选择 转换 java 为 kotlin。转换完成后的效果；
+
+Build file 'D:\aapp\app\build.gradle' line: 2
+
+An exception occurred applying plugin request [id: 'com.android.application']
+> Failed to apply plugin 'com.android.internal.application'.
+   > Android Gradle plugin requires Java 11 to run. You are currently using Java 1.8.
+     You can try some of the following options:
+       - changing the IDE settings.
+       - changing the JAVA_HOME environment variable.
+       - changing `org.gradle.java.home` in `gradle.properties`.
