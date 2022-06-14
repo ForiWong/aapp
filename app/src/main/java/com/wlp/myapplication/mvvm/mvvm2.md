@@ -3,7 +3,7 @@ Mvvm模式: Databinding 与 ViewModel+LiveData+Repository
 链接：https://www.jianshu.com/p/e7628d6e6f61
 来源：简书
 
-![mvvm1](app/src/main/image/mvvm1.png)
+![mvvm1](../../../../../image/mvvm1.png)
 
 它采用双向绑定（data-binding）：View的变动，自动反映在 ViewModel，反之亦然。
 

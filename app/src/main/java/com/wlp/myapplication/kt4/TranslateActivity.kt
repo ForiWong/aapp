@@ -41,15 +41,15 @@ class TranslateActivity : AppCompatActivity() {
         /**
          * 观察翻译结果
          */
-        viewModel.translateResult.observe(this) { result ->
-            val translateResult = result.getOrNull()
-            if (null == translateResult) {
-                tvTranslate.text = "翻译失败"
-                return@observe
-            }
-
-            tvTranslate.text = translateResult.data
-        }
+//        viewModel.translateResult.observe(this) { result ->
+//            val translateResult = result.getOrNull()
+//            if (null == translateResult) {
+//                tvTranslate.text = "翻译失败"
+//                return@observe
+//            }
+//
+//            tvTranslate.text = translateResult.data
+//        }
 
         /**
          * 按钮点击监听

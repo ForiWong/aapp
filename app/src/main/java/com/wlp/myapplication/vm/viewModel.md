@@ -77,10 +77,10 @@ https://www.jianshu.com/p/e8955f525f4c
 
 ViewModel是存储UI相关数据并不会因为旋转而销毁的类。
 最为重要的就是ViewModel具有下面的生命周期，这就是ViewModel的最可贵之处：
-![lifecycle](app/src/main/image/lifecycle.png)
+![lifecycle](../../../../../image/lifecycle.png)
 正因为ViewModel有如此的生命周期，所以ViewModel在MVVM可以作为数据存储区，是连接View和Model重要组件，  
 ViewModel的核心作用如下图所示：
-![vm1](app/src/main/image/vm1.png)
+![vm1](../../../../../image/vm1.png)
 
 ViewModel 的存在是依赖 Activity 或者 Fragment的，不管你在什么地方获取ViewModel ，只要你用的是相同的Activity 或者  
 Fragment，那么获取到的ViewModel将是同一个 (前提是key值是一样的)，所以ViewModel 也具有数据共享的作用！
@@ -110,7 +110,7 @@ ViewModel的。如果获取到就返回。
 ViewModel是存储在当前Activity / Fragment 的 HolderFragment 中的ViewModelStore的HashMap中，我们可以get,put或者在  
 Activity / Fragment销毁的时候HolderFragment会跟随销毁，在HolderFragment的onDestroy方法中调用mViewModelStore的clear方法。
 
-![vm_all](app/src/main/image/vm_all.png)
+![vm_all](../../../../../image/vm_all.png)
 1.ViewModel 以键值对的形式存在Activity或者Fragment的HolderFragment的ViewModelStore的HashMap中。
 2.一个Activity或者Fragment可以有很多个ViewModel。
 3.一个Activity或者Fragment只会有一个HolderFragment。
