@@ -204,3 +204,19 @@ An exception occurred applying plugin request [id: 'com.android.application']
        - changing the IDE settings.
        - changing the JAVA_HOME environment variable.
        - changing `org.gradle.java.home` in `gradle.properties`.
+
+ Process: com.mindorks.retrofit.coroutines, PID: 22681
+    java.lang.NoSuchMethodError: No static method metafactory(Ljava/lang/invoke/MethodHandles$Lookup;Ljava
+    /lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;
+    Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite; in class Ljava/lang/invoke/LambdaMetafactory;
+    or its super classes (declaration of 'java.lang.invoke.LambdaMetafactory' appears in /apex/com.android.
+    runtime/javalib/core-oj.jar)
+项目不支持Lambda语法，引用的第三方的依赖包里面的代码使用了Lambda式的表达式。
+Lambda表达式是JDK8的一个新特性，如果项目没有配置JDK8会报错。
+gradle
+android{
+    compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+}
