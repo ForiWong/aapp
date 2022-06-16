@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <!--在这里定义方法通过activity引用，其实任何类都行-->
+        <variable
+            name="activity"
+            type="com.wlp.myapplication.ktsample.SampleBindingActivity" />
+
+        <variable
+            name="person"
+            type="com.wlp.myapplication.ktsample.data.Person" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/design_default_color_secondary"
+            android:text="@{person.name}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:text="@{person.sex}" />
+
+        <!--调用方式为variable.method或者variable::method-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/design_default_color_secondary"
+            android:onClick="@{activity::onClick}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:onClick="@{activity.onClickTwo}" />
+
+    </LinearLayout>
+</layout>

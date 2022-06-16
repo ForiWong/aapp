@@ -1,7 +1,5 @@
 package com.wlp.myapplication.workmanager;
 
-import static java.util.jar.Pack200.Unpacker.PROGRESS;
-
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -13,7 +11,7 @@ import androidx.work.WorkerParameters;
 public class UploadFileWorker extends Worker {
     public UploadFileWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
-        setProgressAsync(new Data.Builder().putInt(PROGRESS, 0).build());
+        setProgressAsync(new Data.Builder().putInt("PROGRESS", 0).build());
     }
 
     @NonNull

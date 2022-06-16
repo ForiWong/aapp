@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"/>
+
+    <Button
+        android:id="@+id/sample_binding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/design_default_color_secondary"
+        android:text="sample_binding"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/sample_vm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:text="sample_vm"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/sample_vm3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:text="sample_vm3"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/sample_cor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/design_default_color_secondary"
+        android:text="sample_cor"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+</LinearLayout>

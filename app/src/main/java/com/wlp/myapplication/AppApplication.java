@@ -10,15 +10,21 @@ import com.wlp.myapplication.room.AppDatabase;
 
 public class AppApplication extends Application {
     private AppDatabase mAppDatabase;
+    private static Application sInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        sInstance = this;
         mAppDatabase = Room.databaseBuilder(getApplicationContext(),
                     AppDatabase.class, "android_room_dev.db")
                 .allowMainThreadQueries()
                 .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                 .build();
+    }
+
+    public static Application getsInstance(){
+        return sInstance;
     }
 
     public AppDatabase getAppDatabase() {

@@ -110,6 +110,10 @@ object关键字主要有三种使用场景
     对象表达式（object expression）
 java kotlin 编译、打包流程的区别
 协程 suspend
+采用Kotlin Flow和Live Data的高级用法
+自定义框架、动画
+Room数据库和协程
+WorkManager
 data class使用详解
 网络retrofit okhttp  + 协程
 协程 Coroutines flow
@@ -117,7 +121,7 @@ Java与Kotlin相互调用
 lambda表达式
 构造函数的使用
 compose UI
-dagger2
+依赖注入dagger2
 
 java中使用GSON解析json，kotlin使用哪个库比较好？
 
