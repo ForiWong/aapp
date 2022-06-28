@@ -1,5 +1,6 @@
 github项目
 # 1、MVVMHabit-master，6.5k，
+MVVMHabit的Repository的模型问题，万一业务模块多的话，怎么将他分模块的问题
 细读基于谷歌最新AAC架构，MVVM设计模式的一套快速开发库，整合Okhttp+RxJava+Retrofit+Glide等主流模块，满足日常开发需求。使用该框架可以快速开发一个高质量、易维护的Android应用。
 
 #2、KunMinX/Jetpack-MVVM-Best-Practice 6.3k,
@@ -26,7 +27,7 @@ Kotlin
 
 5.5k https://github.com/igorwojda/android-showcase
 
-https://github.com/TanJiaJunBeyond/AndroidGenericFramework
+https://github.com/TanJiaJunBeyond/AndroidGenericFramework × 不看
 
 https://github.com/VIPyinzhiwei/Eyepetizer
 
@@ -66,3 +67,13 @@ base
  ViewModelFactory
 
 Retrofit
+
+
+https://github.com/skydoves/DisneyMotions
+    A Disney app using transformation motions based on MVVM (ViewModel, Coroutines, Flow, Room, Repository, Koin) architecture.
+
+https://github.com/skydoves/MarvelHeroes
+    A sample Marvel heroes application based on MVVM (ViewModel, Coroutines, Room, Repository, Koin) architecture.
+
+https://github.com/MindorksOpenSource/android-mvvm-architecture
+
