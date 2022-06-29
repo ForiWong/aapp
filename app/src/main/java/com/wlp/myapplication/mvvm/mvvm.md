@@ -69,11 +69,30 @@ base
 Retrofit
 
 
-https://github.com/skydoves/DisneyMotions
-    A Disney app using transformation motions based on MVVM (ViewModel, Coroutines, Flow, Room, Repository, Koin) architecture.
+//repository
+https://github.com/skydoves/DisneyMotions √√√
+A Disney app using transformation motions based on MVVM (ViewModel, Coroutines, Flow, Room, Repository, Koin) architecture.
 
-https://github.com/skydoves/MarvelHeroes
-    A sample Marvel heroes application based on MVVM (ViewModel, Coroutines, Room, Repository, Koin) architecture.
+https://github.com/skydoves/MarvelHeroes √√√
+A sample Marvel heroes application based on MVVM (ViewModel, Coroutines, Room, Repository, Koin) architecture.
 
-https://github.com/MindorksOpenSource/android-mvvm-architecture
+https://github.com/MindorksOpenSource/android-mvvm-architecture  ×××，java语言
+This repository contains a detailed sample app that implements MVVM architecture using Dagger2, Room, RxJava2, FastAndroidNetworking and PlaceholderView
+
+https://github.com/MindorksOpenSource/MVVM-Architecture-Android-Beginners  √√√
+This repository contains a sample app that implements MVVM architecture using Kotlin, ViewModel, LiveData, and etc.
+
+https://github.com/hi-dhl/PokemonGo  pokemonGo √√√
+神奇宝贝 (PokemonGo) 基于 Jetpack + MVVM + Repository + Paging3 + Kotlin Flow 的实战项目
+这是一个小型的 App 项目，涉及到技术：Paging3（network + db），Dagger-Hilt，App Startup，DataBinding，Room，Motionlayout，
+Kotlin Flow，Coil，JProgressView 等等。
+
+https://github.com/ibrahimsn98/web-dev-tools-android   ××× 先不看
+Sample Android Application - MVVM, Clean Architecture, Modularization, Repository Pattern
+
+https://github.com/jenly1314/MVVMFrame  ××× 先不看，Java语言
+MVVMFrame for Android 是一个基于Google官方推出的Architecture Components dependencies（现在叫JetPack）
+{ Lifecycle，LiveData，ViewModel，Room } 构建的快速开发框架。有了MVVMFrame的加持，从此构建一个MVVM模
+式的项目变得快捷简单。
+
 
