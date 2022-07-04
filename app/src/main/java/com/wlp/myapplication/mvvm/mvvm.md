@@ -13,7 +13,7 @@ Android 组件化开源app -开眼短视频(OpenEyes)
 一款基于网易云音乐UI，使用玩Android、Gank.Io Api，MVVM-DataBinding架构开发的符合Google Material Design的Android客户端
 
 ###mvvm kotlin
-1、https://github.com/ahmedeltaher/MVVM-Kotlin-Android-Architecture 2k √√
+1、https://github.com/ahmedeltaher/MVVM-Kotlin-Android-Architecture 2k √√  先看
 MVVM + Kotlin + Retrofit2 + Hilt + Coroutines + Kotlin Flow + mockK + Espresso + Junit5
 Hilt:  Hilt 是 Android 的依赖项注入库，可减少在项目中执行手动依赖项注入的样板代码。
        Hilt就是对dagger2的进一步封装.
@@ -22,7 +22,7 @@ Kotlin Flow： 用于流式编程
 mockK：kotlin单元测试利器
 Espresso：自动化测试框架
 
-2、https://github.com/skydoves/Pokedex 5.3k
+2、https://github.com/skydoves/Pokedex 5.3k  先看
 Pokedex demonstrates modern Android development with Hilt, Material Motion, Coroutines, Flow,  
 Jetpack (Room, ViewModel) based on MVVM architecture.
 
@@ -72,10 +72,10 @@ MVVMFrame for Android 是一个基于Google官方推出的Architecture Component
 B站看相关课程
 ###=====框架相关模块
 MVVM DataBinding
-协程
+协程 flow
 Retrofit2
 Room
-koin 依赖注入
+Hilt vs koin 依赖注入
 rxlife
 
 绑定
