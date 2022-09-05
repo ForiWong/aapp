@@ -15,7 +15,8 @@ Framework源码解析（涉及系统启动流程、AMS、PMS、WMS、Zygote、In
 
 优化调整和系统裁剪、系统定制。
 Android Framework需求分解及方案输出；
-原生Android Framework、HAL定制，如AMS/WMS/PMS/OMS、audio等；
+原生Android Framework，如AMS/WMS/PMS/OMS、audio等；
+HAL定制
 android底层驱动
 Android进程管理、内存管理、线程调度等机制。
 
@@ -70,3 +71,6 @@ HID 鼠标 键盘
 移动机器人
 
 ----------------------------------------------------------------
+BSP层的移植、适配及优化；
+主板的bring up，外设驱动的调试、开发及维护
+Andorid系统 Docker 移植工作；
