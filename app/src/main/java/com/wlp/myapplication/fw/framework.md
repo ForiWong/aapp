@@ -68,6 +68,10 @@ Activity、Fragment、Service解析
 
 《Android系统级深入开发--移植和调试》，作者: 韩超//梁泉
 
+深入理解Android内核设计思想.上、下
+作 者 :  林学森著
+ISBN :  978-7-115-45263-4
+
 rom的封装
 手机ROM
 手机、车机、智能电视
