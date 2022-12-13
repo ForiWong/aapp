@@ -8,8 +8,9 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 
+//实现一个自定义的LifecycleOwner
 public class MyActivity extends Activity implements LifecycleOwner {
-    private LifecycleRegistry lifecycleRegistry;
+    private LifecycleRegistry lifecycleRegistry;//lifecycle注册表
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

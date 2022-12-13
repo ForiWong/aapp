@@ -17,7 +17,7 @@ public class MyLocation implements LifecycleObserver {
     public MyLocation(Lifecycle lifecycle){
         mLifecycle = lifecycle;
         // 将自己加入到目标组件生命周期的监听列表中
-        mLifecycle.addObserver(this);//
+        mLifecycle.addObserver(this);//这种应用不对，交叉引用
     }
 
     // 在onCreate时调用
