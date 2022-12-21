@@ -61,6 +61,11 @@ https://github.com/hi-dhl/PokemonGo  pokemonGo √√√
 这是一个小型的 App 项目，涉及到技术：Paging3（network + db），Dagger-Hilt，App Startup，DataBinding，Room，Motionlayout，
 Kotlin Flow，Coil，JProgressView 等等。
 
+https://github.com/hi-dhl/AndroidX-Jetpack-Practice
+一个很好的实践项目，各个专题有技术文章可以看。
+本仓库致力于建立最全、最新的的 AndroidX Jetpack 相关组件的实践项目 以及组件对应的分析文章（持续更新中）如果对你有帮助，请在右上角 
+star 一下，感谢
+
 https://github.com/ibrahimsn98/web-dev-tools-android   ××× 先不看
 Sample Android Application - MVVM, Clean Architecture, Modularization, Repository Pattern
 
