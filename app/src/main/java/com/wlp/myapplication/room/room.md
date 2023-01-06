@@ -6,8 +6,7 @@
 4、创建数据库public abstract class MyDatabase extends RoomDatabase
 5、进阶：表关联、嵌套、多表查询、数据库升级迁移。
 
-Android Room 框架学习
-https://www.jianshu.com/p/3e358eb9ac43
+# Android Room 框架学习 https://www.jianshu.com/p/3e358eb9ac43
 
 Room是一个对象关系映射(ORM)库。Room抽象了SQLite的使用，可以在充分利用SQLite的同时访问流畅的数据库。
 
